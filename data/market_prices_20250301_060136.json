@@ -1,0 +1,156 @@
+{
+    "Rice": {
+        "price_usd": 17.3,
+        "price_inr": 1435.9,
+        "unit": "$ / CWT",
+        "state": "US TOTAL",
+        "timestamp": "2025-03-01 05:59:49"
+    },
+    "Wheat": {
+        "price_usd": 6.96,
+        "price_inr": 577.68,
+        "unit": "$ / BU",
+        "state": "US TOTAL",
+        "timestamp": "2025-03-01 05:59:53"
+    },
+    "Corn": {
+        "price_usd": 4.55,
+        "price_inr": 377.65,
+        "unit": "$ / BU",
+        "state": "US TOTAL",
+        "timestamp": "2025-03-01 05:59:56"
+    },
+    "Barley": {
+        "price_usd": 7.39,
+        "price_inr": 613.37,
+        "unit": "$ / BU",
+        "state": "US TOTAL",
+        "timestamp": "2025-03-01 06:00:00"
+    },
+    "Oats": {
+        "price_usd": 3.92,
+        "price_inr": 325.36,
+        "unit": "$ / BU",
+        "state": "US TOTAL",
+        "timestamp": "2025-03-01 06:00:04"
+    },
+    "Sorghum": {
+        "price_usd": 8.81,
+        "price_inr": 731.23,
+        "unit": "$ / CWT",
+        "state": "US TOTAL",
+        "timestamp": "2025-03-01 06:00:07"
+    },
+    "Millet": {
+        "price_usd": 4.03,
+        "price_inr": 334.49,
+        "unit": "$ / BU",
+        "state": "US TOTAL",
+        "timestamp": "2025-03-01 06:00:09"
+    },
+    "Soybeans": {
+        "price_usd": 12.4,
+        "price_inr": 1029.2,
+        "unit": "$ / BU",
+        "state": "US TOTAL",
+        "timestamp": "2025-03-01 06:00:12"
+    },
+    "Canola": {
+        "price_usd": 24.3,
+        "price_inr": 2016.9,
+        "unit": "$ / CWT",
+        "state": "US TOTAL",
+        "timestamp": "2025-03-01 06:00:16"
+    },
+    "Lentils": {
+        "price_usd": 40.4,
+        "price_inr": 3353.2,
+        "unit": "$ / CWT",
+        "state": "US TOTAL",
+        "timestamp": "2025-03-01 06:00:23"
+    },
+    "Chickpeas": {
+        "price_usd": 36.6,
+        "price_inr": 3037.8,
+        "unit": "$ / CWT",
+        "state": "US TOTAL",
+        "timestamp": "2025-03-01 06:00:26"
+    },
+    "Coffee": {
+        "price_usd": 14.0,
+        "price_inr": 1162.0,
+        "unit": "$ / LB",
+        "state": "US TOTAL",
+        "timestamp": "2025-03-01 06:00:35"
+    },
+    "Almonds": {
+        "price_usd": 1.64,
+        "price_inr": 136.12,
+        "unit": "$ / LB",
+        "state": "US TOTAL",
+        "timestamp": "2025-03-01 06:01:02"
+    },
+    "Walnuts": {
+        "price_usd": 840.0,
+        "price_inr": 69720.0,
+        "unit": "$ / TON",
+        "state": "US TOTAL",
+        "timestamp": "2025-03-01 06:01:06"
+    },
+    "Pistachios": {
+        "price_usd": 2.0,
+        "price_inr": 166.0,
+        "unit": "$ / LB",
+        "state": "US TOTAL",
+        "timestamp": "2025-03-01 06:01:09"
+    },
+    "Potatoes": {
+        "price_usd": 12.3,
+        "price_inr": 1020.9000000000001,
+        "unit": "$ / CWT",
+        "state": "US TOTAL",
+        "timestamp": "2025-03-01 06:01:14"
+    },
+    "Onions": {
+        "price_usd": 24.5,
+        "price_inr": 2033.5,
+        "unit": "$ / CWT",
+        "state": "US TOTAL",
+        "timestamp": "2025-03-01 06:01:17"
+    },
+    "Tomatoes": {
+        "price_usd": 9.46,
+        "price_inr": 785.1800000000001,
+        "unit": "$ / CWT",
+        "state": "US TOTAL",
+        "timestamp": "2025-03-01 06:01:19"
+    },
+    "Garlic": {
+        "price_usd": 77.8,
+        "price_inr": 6457.4,
+        "unit": "$ / CWT",
+        "state": "US TOTAL",
+        "timestamp": "2025-03-01 06:01:21"
+    },
+    "Cotton": {
+        "price_usd": 0.8,
+        "price_inr": 66.4,
+        "unit": "$ / LB",
+        "state": "US TOTAL",
+        "timestamp": "2025-03-01 06:01:28"
+    },
+    "Wool": {
+        "price_usd": 1.56,
+        "price_inr": 129.48000000000002,
+        "unit": "$ / LB",
+        "state": "US TOTAL",
+        "timestamp": "2025-03-01 06:01:30"
+    },
+    "Peanuts": {
+        "price_usd": 0.269,
+        "price_inr": 22.327,
+        "unit": "$ / LB",
+        "state": "US TOTAL",
+        "timestamp": "2025-03-01 06:01:36"
+    }
+}

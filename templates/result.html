@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Crop Predictor | Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            min-height: 100vh;
+            color: white;
+        }
+        .container {
+            max-width: 1000px;
+        }
+        .results-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: none;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            margin-bottom: 2rem;
+        }
+        .crop-card {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+        .crop-card:hover {
+            transform: translateY(-5px);
+        }
+        .section-title {
+            color: #2ecc71;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        .btn-action {
+            background: #2ecc71;
+            border: none;
+            padding: 12px 40px;
+            font-weight: bold;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 10px;
+        }
+        .btn-action:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+            color: white;
+        }
+        .chart-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .timestamp {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 20px;
+        }
+        .disclaimer-banner {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h1>Prediction Results</h1>
+            <p class="lead">Smart Crop Analysis Summary</p>
+        </div>
+
+        <div class="results-card">
+            <h3 class="section-title">Top Recommended Crops</h3>
+            <div class="row">
+                {% for crop in result.top_3_crops %}
+                <div class="col-md-4">
+                    <div class="crop-card">
+                        <h4>{{ crop.crop }}</h4>
+                        <p class="mb-0">Confidence: {{ "%.2f"|format(crop.probability) }}%</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="results-card">
+            <h3 class="section-title">Revenue Analysis</h3>
+            <div class="row">
+                {% for revenue in result.revenue_data %}
+                <div class="col-md-4">
+                    <div class="crop-card">
+                        <h4>{{ revenue.crop }}</h4>
+                        <p>Yield per Acre: {{ revenue.yield_per_acre|format_number }} kg</p>
+                        <p>Price per kg: ₹{{ revenue.price_per_kg|format_number }}</p>
+                        <p class="mb-0">Potential Revenue: ₹{{ revenue.gross_revenue|format_number }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="results-card">
+            <h3 class="section-title">Probability Distribution</h3>
+            <div class="chart-container">
+                <div id="pieChart"></div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ url_for('yield_calculator') }}" class="btn-action">
+                <i class="fas fa-calculator me-2"></i>Calculate Profit
+            </a>
+            <a href="{{ url_for('home') }}" class="btn-action">
+                <i class="fas fa-home me-2"></i>New Prediction
+            </a>
+        </div>
+
+        <div class="timestamp">
+            Prediction made on: {{ result.timestamp }}
+        </div>
+    </div>
+
+    <div class="disclaimer-banner">
+        DISCLAIMER: The prices shown are average market rates and may vary based on location, season, and market conditions. Please consult local agricultural authorities for current market prices.
+    </div>
+
+    <script>
+        var graphs = {{ result.pie_chart | safe }};
+        Plotly.newPlot('pieChart', graphs.data, graphs.layout);
+    </script>
+</body>
+</html>

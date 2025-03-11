@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Crop Predictor | Yield Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            min-height: 100vh;
+            color: white;
+        }
+        .container {
+            max-width: 1000px;
+        }
+        .calculator-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: none;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+        .form-control {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+        }
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            box-shadow: 0 0 0 0.25rem rgba(46, 204, 113, 0.25);
+        }
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .section-title {
+            color: #2ecc71;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        .btn-action {
+            background: #2ecc71;
+            border: none;
+            padding: 12px 40px;
+            font-weight: bold;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            color: white;
+        }
+        .btn-action:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .prediction-summary {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .crop-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .agmarknet-banner {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+        }
+        .agmarknet-banner a {
+            color: #2ecc71;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .agmarknet-banner a:hover {
+            color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h1>Agricultural Cost Calculator</h1>
+            <p class="lead">Calculate your potential farming profits</p>
+        </div>
+
+        {% if error %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ error }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endif %}
+
+        {% if prediction and prediction.revenue_data %}
+        <div class="prediction-summary">
+            <h3 class="section-title">Previous Crop Predictions</h3>
+            <div class="row">
+                {% for revenue in prediction.revenue_data %}
+                <div class="col-md-4">
+                    <div class="crop-card">
+                        <h4>{{ revenue.crop }}</h4>
+                        <p class="mb-0">Potential Revenue: ₹{{ revenue.gross_revenue|format_number }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="calculator-card">
+            <form action="{{ url_for('calculate_profit') }}" method="POST">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <label class="form-label">Seed Cost (₹)</label>
+                        <input type="number" class="form-control" name="seed_cost" required min="0" step="0.01">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Land Preparation Cost (₹)</label>
+                        <input type="number" class="form-control" name="land_cost" required min="0" step="0.01">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Fertilizer Cost (₹)</label>
+                        <input type="number" class="form-control" name="fertilizer_cost" required min="0" step="0.01">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Irrigation Cost (₹)</label>
+                        <input type="number" class="form-control" name="irrigation_cost" required min="0" step="0.01">
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label">Labor Cost (₹)</label>
+                        <input type="number" class="form-control" name="labor_cost" required min="0" step="0.01">
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-action">
+                        <i class="fas fa-calculator me-2"></i>Calculate Profit
+                    </button>
+                    <a href="{{ url_for('home') }}" class="btn btn-action btn-secondary">
+                        <i class="fas fa-home me-2"></i>Back to Home
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="agmarknet-banner">
+        For current market prices from Central Government, visit 
+        <a href="https://agmarknet.gov.in" target="_blank">Agmarknet Website</a>
+        for real-time agricultural market information.
+    </div>
+</body>
+</html>

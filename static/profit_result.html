@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Crop Predictor | Profit Analysis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            min-height: 100vh;
+            color: white;
+        }
+        .container {
+            max-width: 1000px;
+        }
+        .profit-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: none;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            margin-bottom: 2rem;
+            transform: translateY(50px);
+            opacity: 0;
+            animation: slideUp 0.5s ease forwards;
+        }
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .profit-card:nth-child(2) { animation-delay: 0.2s; }
+        .profit-card:nth-child(3) { animation-delay: 0.4s; }
+        
+        .section-title {
+            color: #2ecc71;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        .profit-details {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+        .profit-details:hover {
+            transform: translateY(-5px);
+        }
+        .profit-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .positive-profit {
+            color: #2ecc71;
+        }
+        .negative-profit {
+            color: #e74c3c;
+        }
+        .btn-action {
+            background: #2ecc71;
+            border: none;
+            padding: 12px 40px;
+            font-weight: bold;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 10px;
+        }
+        .btn-action:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+            color: white;
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .calculation-date {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+        .parameter-group {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h1>Profit Analysis Results</h1>
+            <p class="lead">Detailed breakdown of potential profits</p>
+        </div>
+        
+        <div class="profit-card">
+            <h3 class="section-title">Profit Summary</h3>
+            <div class="row">
+                {% for profit in profits %}
+                <div class="col-md-4">
+                    <div class="profit-details">
+                        <h4>{{ profit.crop }}</h4>
+                        <div class="profit-value {% if profit.net_profit > 0 %}positive-profit{% else %}negative-profit{% endif %}">
+                            Net Profit: ₹{{ profit.net_profit|format_number }}
+                        </div>
+                        <div class="parameter-group">
+                            <p class="mb-2">Total Investment: ₹{{ profit.total_cost|format_number }}</p>
+                            <p class="mb-0">Expected Revenue: ₹{{ profit.gross_revenue|format_number }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ url_for('home') }}" class="btn-action">
+                <i class="fas fa-seedling me-2"></i>New Prediction
+            </a>
+            <a href="{{ url_for('yield_calculator') }}" class="btn-action btn-secondary">
+                <i class="fas fa-calculator me-2"></i>Back to Calculator
+            </a>
+        </div>
+
+        <div class="calculation-date">
+            Analysis Date: {{ calculation_date }}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
